@@ -2,191 +2,114 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
+<title>For You ❤️</title>
 
 <style>
-
 body{
-font-family: Arial;
-text-align:center;
-background:#ffd6e7;
-margin:0;
-padding:0;
-}
-
-.page{
-display:none;
-padding:40px;
-}
-
-.active{
-display:block;
-}
-
-button{
-padding:12px 25px;
-margin:10px;
-font-size:18px;
-border:none;
-border-radius:20px;
-background:#ff6fa5;
-color:white;
-cursor:pointer;
-}
-
-button:hover{
-background:#ff4f90;
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#ffe6f0;
+  overflow:hidden;
+  text-align:center;
 }
 
 h1{
-color:#ff3f86;
+  margin-top:80px;
+  color:#ff4d88;
 }
 
-.cake{
-font-size:80px;
+p{
+  font-size:18px;
+  padding:0 20px;
 }
 
-.hearts{
-font-size:30px;
-animation: float 3s infinite;
+button{
+  padding:12px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff4d88;
+  color:white;
+  font-size:16px;
+  cursor:pointer;
+  margin-top:20px;
+}
+
+button:hover{
+  background:#ff1a66;
+}
+
+/* floating hearts */
+.heart{
+  position:absolute;
+  color:#ff4d88;
+  font-size:20px;
+  animation:float 6s linear infinite;
 }
 
 @keyframes float{
-0%{transform:translateY(0)}
-50%{transform:translateY(-10px)}
-100%{transform:translateY(0)}
+  0%{
+    transform:translateY(100vh);
+    opacity:1;
+  }
+  100%{
+    transform:translateY(-10vh);
+    opacity:0;
+  }
 }
 
+.bear{
+  font-size:80px;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-15px)}
+}
+
+#hug{
+  display:none;
+  font-size:60px;
+  margin-top:30px;
+}
 </style>
+
 </head>
 
 <body>
 
-<!-- PAGE 1 -->
-<div id="page1" class="page active">
+<div class="bear">🐻</div>
 
-<h2>🐻‍❄️ 🐻</h2>
-
-<h3>
-Hey sweetheart… I made something special for you.<br>
-Do you wanna see it?
-</h3>
-
-<button onclick="yes()">YES 💗</button>
-<button onclick="no()">NO 🙈</button>
-
-</div>
-
-
-<!-- PAGE NO -->
-<div id="pageNo" class="page">
-
-<h2>🐻‍❄️ sitting on 🐻</h2>
-
-<h3>Why did you click no!? 😠</h3>
-
-<button onclick="back()">Try Again</button>
-
-</div>
-
-
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-
-<h1>🎆 HAPPY BIRTHDAY TO YOU 🎆</h1>
-
-<p>The sky has a message today...</p>
-
-<button onclick="next()">Continue the surprise 💌</button>
-
-</div>
-
-
-<!-- PAGE 3 -->
-<div id="page3" class="page">
-
-<div class="cake">🎂</div>
-
-<p style="max-width:600px;margin:auto;font-size:18px;line-height:1.6">
-
-<b>Happy Birthday to you.</b><br><br>
-
-It’s funny how life works sometimes… how someone who was once just a person in the crowd slowly becomes someone really important.<br><br>
-
-From those little moments of noticing each other to all the conversations and memories we share now, every moment has meant something to me.<br><br>
-
-You’re someone who’s impossible to ignore — smart, determined, and honestly very handsome too.<br><br>
-
-I truly hope this year brings you success, happiness, and everything you’ve been working so hard for.<br><br>
-
-And no matter where life takes us, I hope you always take care of yourself and keep chasing your dreams… even if someday I’m not right there beside you, and that day might come sooner than we expect.<br><br>
-
-Of course it may not make a big difference in your life if I'm not there, but I just want you to always be happy and take care of yourself.<br><br>
-
-And one more thing… don’t flirt with too many girls, okay? Someone might get jealous. 😌
-
-</p>
-
-<button onclick="secret()">One more thing...</button>
-
-</div>
-
-
-<!-- PAGE 4 -->
-<div id="page4" class="page">
-
-<button onclick="openSecret()">Open Secret 🤫</button>
-
-<div id="secretText" style="display:none">
-
-<h2>Secret unlocked 🤫</h2>
+<h1>Hey Handsome ❤️</h1>
 
 <p>
-If you made it all the way here…<br>
-I hope this little surprise made you smile<br>
-and blush a little bit.<br><br>
-
-Happy Birthday.<br>
-— From your Madam Ji ❤️
+Happy Birthday!  
+I made this little page just for you.  
+I hope this made you blush a little bit… madam ji would approve 😌
 </p>
 
-<div class="hearts">💗 💗 💗</div>
+<button onclick="showHug()">Open your virtual hug 🤗</button>
 
-</div>
-
-</div>
-
-
+<div id="hug">🤗💖🤗</div>
 
 <script>
 
-function yes(){
-show("page2")
-}
+/* floating hearts generator */
+setInterval(()=>{
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💖";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
 
-function no(){
-show("pageNo")
-}
+  setTimeout(()=>{heart.remove()},6000);
+},500);
 
-function back(){
-show("page1")
-}
 
-function next(){
-show("page3")
-}
-
-function secret(){
-show("page4")
-}
-
-function openSecret(){
-document.getElementById("secretText").style.display="block"
-}
-
-function show(page){
-document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"))
-document.getElementById(page).classList.add("active")
+/* virtual hug */
+function showHug(){
+  document.getElementById("hug").style.display="block";
 }
 
 </script>
